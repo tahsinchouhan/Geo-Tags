@@ -10,6 +10,18 @@ import {
 } from "antd";
 import React from "react";
 const RegisterVolunteer = () => {
+  const [form] = Form.useForm();
+  const onFinish = (values) => {
+    console.log("Received values of form: ", values);
+  };
+  const normFile = (e) => {
+    console.log("Upload event:", e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  };
+
   return (
     <section className="bg-gray-50 pt-28 min-h-screen">
       <div className="flex flex-col items-center justify-center px-6 mx-auto bg-white lg:w-1/2 sm:w-[75%] w-full pt-5 pb-2 shadow-xl shadow-slate-300">
@@ -30,12 +42,20 @@ const RegisterVolunteer = () => {
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
+          form={form}
+          onFinish={onFinish}
         >
           <Form.Item label="Name">
             <Input placeholder="Your Name" />
           </Form.Item>
+          <Form.Item label="Email">
+            <Input placeholder="Your Email" type="email" />
+          </Form.Item>
           <Form.Item label="Aadhar Number">
             <InputNumber className="w-full" placeholder="123456789876" />
+          </Form.Item>
+          <Form.Item label="Mobile Number">
+            <InputNumber className="w-full" placeholder="+91 1234567890" />
           </Form.Item>
           <Form.Item label="Gender">
             <Radio.Group>
@@ -68,7 +88,12 @@ const RegisterVolunteer = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" size="middle" className="bg-blue-500 w-28">
+            <Button
+              type="primary"
+              typeof="Submit"
+              size="middle"
+              className="bg-blue-500 w-28"
+            >
               Submit
             </Button>
           </Form.Item>

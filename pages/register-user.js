@@ -1,7 +1,35 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const RegisterUser = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("/api/register/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          number: number,
+        }),
+      });
+      const data = await res.json();
+      setLoading(false);
+    } catch (error) {
+      alert(error.message);
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
       <section className="bg-gray-50 ">
@@ -29,7 +57,7 @@ const RegisterUser = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
                 Register With Us
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label
                     htmlFor="name"
@@ -41,6 +69,7 @@ const RegisterUser = () => {
                     type="test"
                     name="name"
                     id="name"
+                    onChange={(e) => setName(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="eg. John Doe"
                     required
@@ -57,6 +86,7 @@ const RegisterUser = () => {
                     type="email"
                     name="email"
                     id="email"
+                    onChange={(e) => setEmail(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="name@company.com"
                   />
@@ -72,6 +102,7 @@ const RegisterUser = () => {
                     type="number"
                     name="number"
                     id="number"
+                    onChange={(e) => setNumber(e.target.value)}
                     placeholder="+91 1234567890"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     required
