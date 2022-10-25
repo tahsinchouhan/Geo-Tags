@@ -24,6 +24,10 @@ const volunteerSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    state: {
+      type: String,
+      required: true,
+    },
     district: {
       type: String,
       required: true,
@@ -32,7 +36,7 @@ const volunteerSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    vidhan: {
+    vidhansabha: {
       type: String,
       required: true,
     },
@@ -40,8 +44,12 @@ const volunteerSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    number: {
+    mobilenumber: {
       type: Number,
+      required: true,
+    },
+    address: {
+      type: String,
       required: true,
     },
   },

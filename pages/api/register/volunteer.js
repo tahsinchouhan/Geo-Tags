@@ -10,16 +10,32 @@ export default async function handler(req, res) {
       gender,
       birthdate,
       age,
+      state,
       district,
       block,
-      vidhan,
+      vidhansabha,
       email,
-      number,
+      mobilenumber,
+      address,
     } = req.body;
-    if (!name || !aadhar || !email || !number) {
+    console.log(
+      name,
+      aadhar,
+      gender,
+      birthdate,
+      age,
+      state,
+      district,
+      block,
+      vidhansabha,
+      email,
+      mobilenumber,
+      address
+    );
+    if (!name || !aadhar || !email || !mobilenumber) {
       return res.status(422).json({ error: "Please add all the fields" });
     }
-    const volunteer = await VolunteerModal.findOne({ number });
+    const volunteer = await VolunteerModal.findOne({ mobilenumber });
     if (volunteer) {
       return res
         .status(422)
@@ -31,11 +47,13 @@ export default async function handler(req, res) {
       gender,
       birthdate,
       age,
+      state,
       district,
       block,
-      vidhan,
+      vidhansabha,
       email,
-      number,
+      mobilenumber,
+      address,
     });
     await closeMongo();
     return res

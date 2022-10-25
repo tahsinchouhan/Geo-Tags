@@ -1,3 +1,4 @@
+import LocationContextProvider from "../AppContext";
 import Navbar from "../components/Navbar";
 import "../styles/globals.css";
 
@@ -9,7 +10,9 @@ function MyApp({ Component, pageProps }) {
           <Navbar />
         </div>
         <div className="z-0">
-          <Component {...pageProps} />
+          <LocationContextProvider>
+            <Component {...pageProps} />
+          </LocationContextProvider>
         </div>
       </div>
       {/* <Footer /> */}

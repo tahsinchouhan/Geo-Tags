@@ -23,10 +23,11 @@ const RegisterUser = () => {
         }),
       });
       const data = await res.json();
+      console.log(data);
       setLoading(false);
     } catch (error) {
-      alert(error.message);
       setLoading(false);
+      return res.status(500).json({ error: error.message });
     }
   };
 
