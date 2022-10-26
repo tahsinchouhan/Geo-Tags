@@ -47,30 +47,12 @@ const LocationContextProvider = (props) => {
   //       }
   //     }
   //   }, [coords]);
-  //   const getGeoLocation = async () => {
-  //     try {
-  //       const res = await fetch(
-  //         `https://apis.mapmyindia.com/advancedmaps/v1/3758f2e35e5baa120e5af659d1a2be63/rev_geocode?lat=${latitude}&lng=${longitude}&region=IND&lang=Eng`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //         }
-  //       );
-  //       const data = await res.json();
-  //       console.log(data);
-  //       setLocation(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
 
   useEffect(() => {
     if (coords) {
       try {
         const response = fetch(
-          `https://apis.mapmyindia.com/advancedmaps/v1/sssf8c1ecf98cdfc465e042a2bedfba54d3ssss/rev_geocode?lat=${latitude}&lng=${longitude}&region=IND&lang=Eng`,
+          `https://apis.mapmyindia.com/advancedmaps/v1/f8c1ecf98cdfc465e042a2bedfba54d3/rev_geocode?lat=${latitude}&lng=${longitude}&region=IND&lang=Eng`,
           {
             method: "GET",
             headers: {

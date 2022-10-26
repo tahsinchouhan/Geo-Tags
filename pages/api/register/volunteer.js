@@ -18,20 +18,6 @@ export default async function handler(req, res) {
       mobilenumber,
       address,
     } = req.body;
-    console.log(
-      name,
-      aadhar,
-      gender,
-      birthdate,
-      age,
-      state,
-      district,
-      block,
-      vidhansabha,
-      email,
-      mobilenumber,
-      address
-    );
     if (!name || !aadhar || !email || !mobilenumber) {
       return res.status(422).json({ error: "Please add all the fields" });
     }

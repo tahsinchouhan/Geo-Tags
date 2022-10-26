@@ -40,11 +40,11 @@ const houseSchema = new mongoose.Schema(
     },
     latitude: {
       type: Number,
-      required: false,
+      required: true,
     },
     longitude: {
       type: Number,
-      required: false,
+      required: true,
     },
   },
   { timestamps: true }

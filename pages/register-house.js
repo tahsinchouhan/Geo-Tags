@@ -6,9 +6,12 @@ const RegisterHouse = () => {
   const [form] = Form.useForm();
   const { location } = useContext(LocationContext);
   console.log("location", location);
-  const CurrentLocation = location?.results;
-  // const { formatted_address, district, locality, pincode, houseNumber } =
-  //   CurrentLocation;
+
+  const CurrentLocation = location?.results[0];
+  console.log(CurrentLocation);
+
+  const { formatted_address, district, locality, pincode, houseNumber } =
+    CurrentLocation;
   const onFinish = async (values) => {
     console.log("Received values of form: ", values);
     setLoading(true);
@@ -54,7 +57,7 @@ const RegisterHouse = () => {
           Register A House
         </a>
       </div>
-      <div className="lg:w-1/2 sm:w-[90%] w-full mx-auto bg-white py-2 pl-12 shadow-xl shadow-slate-300">
+      <div className="lg:w-1/2 sm:w-[90%] w-full mx-auto bg-white py-2 sm:pl-12 sm:px-0 px-3 shadow-xl shadow-slate-300">
         <Form
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
@@ -100,7 +103,6 @@ const RegisterHouse = () => {
               placeholder="Your Area Pin Code"
             />
           </Form.Item>
-
           <Form.Item
             rules={[{ required: true }]}
             name="landmark"
@@ -108,7 +110,6 @@ const RegisterHouse = () => {
           >
             <Input placeholder="Landmark" />
           </Form.Item>
-
           <Form.Item
             rules={[{ required: true }]}
             name="district"

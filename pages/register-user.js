@@ -34,7 +34,7 @@ const RegisterUser = () => {
   return (
     <div>
       <section className="bg-gray-50 ">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div className="flex flex-col items-center justify-center sm:px-6 px-3 py-8 mx-auto md:h-screen lg:py-0">
           <a
             href="#"
             className="flex items-center mb-6 text-2xl font-semibold text-gray-900 "
@@ -46,15 +46,15 @@ const RegisterUser = () => {
             />
             Geo Tags
           </a>
-          <div className="w-full bg-white rounded-2xl shadow md:mt-0 sm:max-w-7xl xl:p-0 flex">
-            <div className="w-1/2">
+          <div className="w-full bg-white rounded-2xl shadow md:mt-0 sm:max-w-7xl xl:p-0 flex sm:flex-row flex-col">
+            <div className="sm:w-1/2 w-full">
               <img
                 src="/assets/images/register.jpg"
                 alt="Register "
                 className="rounded-2xl"
               />
             </div>
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-1/2 border-l">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8 sm:w-1/2 w-full border-l">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
                 Register With Us
               </h1>
