@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -25,9 +26,10 @@ const RegisterUser = () => {
       const data = await res.json();
       console.log(data);
       setLoading(false);
+      setEmail(""), setName(""), setNumber("");
     } catch (error) {
+      console.log(error);
       setLoading(false);
-      return res.status(500).json({ error: error.message });
     }
   };
 
@@ -58,7 +60,11 @@ const RegisterUser = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
                 Register With Us
               </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+              <form
+                id="userform"
+                className="space-y-4 md:space-y-6"
+                onSubmit={handleSubmit}
+              >
                 <div>
                   <label
                     htmlFor="name"
@@ -70,6 +76,7 @@ const RegisterUser = () => {
                     type="test"
                     name="name"
                     id="name"
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="eg. John Doe"
@@ -87,6 +94,7 @@ const RegisterUser = () => {
                     type="email"
                     name="email"
                     id="email"
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="name@company.com"
@@ -103,6 +111,7 @@ const RegisterUser = () => {
                     type="number"
                     name="number"
                     id="number"
+                    value={number}
                     onChange={(e) => setNumber(e.target.value)}
                     placeholder="+91 1234567890"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
@@ -136,12 +145,21 @@ const RegisterUser = () => {
                     </label>
                   </div>
                 </div>
-                <button
+                {/* <button
                   type="submit"
                   className="w-full border bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                 >
                   Create an account
-                </button>
+                </button> */}
+                <Button
+                  loading={loading}
+                  type="primary"
+                  htmlType="submit"
+                  size="middle"
+                  className="bg-blue-500 w-full"
+                >
+                  Create an account
+                </Button>
                 <p className="text-sm font-light text-gray-500 ">
                   Not a User
                   <Link href="/register-volunteer">

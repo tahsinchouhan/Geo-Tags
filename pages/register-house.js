@@ -7,11 +7,18 @@ const RegisterHouse = () => {
   const { location } = useContext(LocationContext);
   console.log("location", location);
 
-  const CurrentLocation = location?.results[0];
+  const CurrentLocation = location || {};
   console.log(CurrentLocation);
 
-  const { formatted_address, district, locality, pincode, houseNumber } =
-    CurrentLocation;
+  const {
+    formatted_address,
+    district,
+    locality,
+    pincode,
+    houseNumber,
+    lat,
+    lng,
+  } = CurrentLocation;
   const onFinish = async (values) => {
     console.log("Received values of form: ", values);
     setLoading(true);
@@ -31,14 +38,17 @@ const RegisterHouse = () => {
           block: values.block,
           vidhan: values.vidhan,
           address: values.address,
+          latitude: lat,
+          longitude: lng,
         }),
       });
       const data = await res.json();
       console.log(data);
       setLoading(false);
+      form.resetFields();
     } catch (error) {
+      console.log(error);
       setLoading(false);
-      return res.status(500).json({ error: error.message });
     }
   };
 
@@ -74,23 +84,24 @@ const RegisterHouse = () => {
           </Form.Item>
           <Form.Item
             rules={[{ required: true }]}
-            name="housenumber"
-            label="House Number"
-          >
-            <Input
-              type="number"
-              // defaultValue={houseNumber}
-              className="w-36"
-              placeholder="101"
-            />
-          </Form.Item>
-          <Form.Item
-            rules={[{ required: true }]}
             name="numberofresidents"
             label="Number of Residents"
           >
             <Input type="number" min={1} className="w-36" placeholder="1 2 3" />
           </Form.Item>
+          <Form.Item
+            rules={[{ required: true }]}
+            name="housenumber"
+            label="House Number"
+          >
+            <Input
+              type="number"
+              defaultValue={houseNumber ? houseNumber : ""}
+              className="w-36"
+              placeholder="101"
+            />
+          </Form.Item>
+
           <Form.Item
             rules={[{ required: true }]}
             name="pincode"
@@ -99,7 +110,7 @@ const RegisterHouse = () => {
             <Input
               type="number"
               className="w-36"
-              // defaultValue={pincode}
+              defaultValue={pincode ? pincode : ""}
               placeholder="Your Area Pin Code"
             />
           </Form.Item>
@@ -117,7 +128,7 @@ const RegisterHouse = () => {
           >
             <Input
               placeholder="Your District"
-              // defaultValue={district}
+              defaultValue={district ? district : ""}
             />
           </Form.Item>
           <Form.Item rules={[{ required: true }]} name="block" label="Block">
@@ -128,7 +139,10 @@ const RegisterHouse = () => {
             name="vidhan"
             label="Vidhan Sabha"
           >
-            <Input placeholder="Your Vidhan Sabha" />
+            <Input
+              defaultValue={locality ? locality : ""}
+              placeholder="Your Vidhan Sabha"
+            />
           </Form.Item>
           <Form.Item
             rules={[{ required: true }]}
@@ -137,11 +151,12 @@ const RegisterHouse = () => {
           >
             <Input
               rows={2}
-              // defaultValue={formatted_address}
+              defaultValue={formatted_address ? formatted_address : ""}
             />
           </Form.Item>
           <Form.Item>
             <Button
+              loading={loading}
               htmlType="submit"
               type="primary"
               size="middle"

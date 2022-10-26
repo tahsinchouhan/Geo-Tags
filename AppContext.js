@@ -52,7 +52,7 @@ const LocationContextProvider = (props) => {
     if (coords) {
       try {
         const response = fetch(
-          `https://apis.mapmyindia.com/advancedmaps/v1/f8c1ecf98cdfc465e042a2bedfba54d3/rev_geocode?lat=${latitude}&lng=${longitude}&region=IND&lang=Eng`,
+          `https://apis.mapmyindia.com/advancedmaps/v1/ssssf8c1ecf98cdfc465e042a2bedfba54d3ssss/rev_geocode?lat=${latitude}&lng=${longitude}&region=IND&lang=Eng`,
           {
             method: "GET",
             headers: {
@@ -63,7 +63,7 @@ const LocationContextProvider = (props) => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-            setLocation(data);
+            setLocation(data?.results[0]);
           });
       } catch (error) {
         console.log(error);
@@ -73,7 +73,7 @@ const LocationContextProvider = (props) => {
   }, [coords]);
 
   return (
-    <LocationContext.Provider value={{ location: location !== {} && location }}>
+    <LocationContext.Provider value={{ location }}>
       {props.children}
     </LocationContext.Provider>
   );

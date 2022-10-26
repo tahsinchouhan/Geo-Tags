@@ -5,9 +5,17 @@ import { LocationContext } from "../AppContext";
 const RegisterVolunteer = () => {
   const [loading, setLoading] = useState(false);
   const { location } = useContext(LocationContext);
-  console.log("location", location);
-  const CurrentLocation = location?.results;
-  // console.log("CurrentLocation", CurrentLocation);
+  const CurrentLocation = location || {};
+  const {
+    formatted_address,
+    district,
+    locality,
+    state,
+    pincode,
+    houseNumber,
+    lat,
+    lng,
+  } = CurrentLocation;
 
   // const CurrentLocation = location?.results.find((item) => item !== null);
   // console.log("CurrentLocation", CurrentLocation);
@@ -40,9 +48,10 @@ const RegisterVolunteer = () => {
       const data = await res.json();
       console.log(data);
       setLoading(false);
+      form.resetFields();
     } catch (error) {
+      console.log(error);
       setLoading(false);
-      return res.status(500).json({ error: error.message });
     }
   };
 
@@ -118,12 +127,7 @@ const RegisterVolunteer = () => {
             </Upload>
           </Form.Item>
           <Form.Item rules={[{ required: true }]} name="state" label="State">
-            <Input
-              defaultValue={
-                CurrentLocation?.state !== "" ? CurrentLocation?.state : ""
-              }
-              placeholder="Your State"
-            />
+            <Input defaultValue={state ? state : ""} placeholder="Your State" />
           </Form.Item>
           <Form.Item
             rules={[{ required: true }]}
@@ -131,11 +135,7 @@ const RegisterVolunteer = () => {
             label="District"
           >
             <Input
-              defaultValue={
-                CurrentLocation?.district !== ""
-                  ? CurrentLocation?.district
-                  : ""
-              }
+              defaultValue={district ? district : ""}
               placeholder="Your District"
             />
           </Form.Item>
@@ -144,9 +144,7 @@ const RegisterVolunteer = () => {
           </Form.Item>
           <Form.Item
             rules={[{ required: true }]}
-            defaultValue={
-              CurrentLocation?.locality !== "" ? CurrentLocation?.locality : ""
-            }
+            defaultValue={locality ? locality : ""}
             name="vidhansabha"
             label="Vidhan Sabha"
           >
@@ -159,15 +157,12 @@ const RegisterVolunteer = () => {
           >
             <Input
               placeholder="Your Address"
-              defaultValue={
-                CurrentLocation?.formatted_address !== ""
-                  ? CurrentLocation?.formatted_address
-                  : ""
-              }
+              defaultValue={formatted_address ? formatted_address : ""}
             />
           </Form.Item>
           <Form.Item>
             <Button
+              loading={loading}
               type="primary"
               htmlType="submit"
               size="middle"

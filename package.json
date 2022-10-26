@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "antd": "^4.23.6",
+    "mapmyindia-react": "^1.0.6",
     "mongoose": "^6.6.7",
     "next": "12.3.1",
     "react": "18.2.0",
@@ -17,6 +18,7 @@
     "react-geocode": "^0.2.3",
     "react-geolocated": "^4.0.3",
     "react-icons": "^4.6.0",
+    "react-mapmyindia": "^1.0.3",
     "react-modern-drawer": "^1.1.2",
     "react-toastify": "^9.0.8"
   },

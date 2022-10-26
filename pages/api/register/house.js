@@ -14,6 +14,8 @@ export default async function handler(req, res) {
       block,
       vidhan,
       address,
+      latitude,
+      longitude,
     } = req.body;
     if (
       !housenumber ||
@@ -36,6 +38,8 @@ export default async function handler(req, res) {
       block,
       vidhan,
       address,
+      latitude,
+      longitude,
     });
     await closeMongo();
     return res
